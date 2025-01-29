@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Card Designer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 80%;
+            max-width: 1000px;
+        }
+
+        .controls {
+            width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            margin-right: 20px;
+        }
+
+        .card-container {
+            width: 350px;
+            height: 500px;
+            padding: 20px;
+            border-radius: 15px;
+            position: relative;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column; /* Stack items vertically */
+            justify-content: flex-start; /* Align content to the top */
+        }
+
+        .greeting-text {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px; /* Adds space between text and image */
+            text-align: center;
+        }
+
+        .card-container img {
+            width: 100%;
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 10px;
+        }
+
+        label {
+            font-size: 14px;
+            margin-right: 10px;
+        }
+
+        input, select {
+            padding: 5px;
+            margin: 5px;
+            width: 100%;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="controls">
+            <h3>Customize Your Birthday Card</h3>
+            <label for="bgColor">Background Color:</label>
+            <input type="color" id="bgColor" value="#f4f4f4"><br>
+
+            <label for="fontFamily">Font:</label>
+            <select id="fontFamily">
+                <option value="Arial" selected>Arial</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Courier New">Courier New</option>
+            </select><br>
+
+            <label for="fontSize">Font Size:</label>
+            <input type="number" id="fontSize" value="24" min="10" max="72"><br>
+
+            <label for="borderStyle">Border Style:</label>
+            <select id="borderStyle">
+                <option value="solid" selected>Solid</option>
+                <option value="dashed">Dashed</option>
+                <option value="dotted">Dotted</option>
+            </select><br>
+
+            <label for="greeting">Greeting Text:</label>
+            <input type="text" id="greeting" value="Happy Birthday!"><br>
+
+            <label for="showImage">Show Default Image:</label>
+            <input type="checkbox" id="showImage" checked><br>
+
+            <button onclick="applyCustomizations()">Apply Customizations</button>
+        </div>
+
+        <div class="card-container" id="birthdayCard">
+            <div class="greeting-text" id="greetingText">Happy Birthday!</div>
+            <img src="birthday.jpg" alt="Birthday Image" id="cardImage">
+        </div>
+    </div>
+
+    <script>
+        function applyCustomizations() {
+            // Get values from inputs
+            const bgColor = document.getElementById('bgColor').value;
+            const fontFamily = document.getElementById('fontFamily').value;
+            const fontSize = document.getElementById('fontSize').value;
+            const borderStyle = document.getElementById('borderStyle').value;
+            const greeting = document.getElementById('greeting').value;
+            const showImage = document.getElementById('showImage').checked;
+
+            // Apply customizations to the card
+            const card = document.getElementById('birthdayCard');
+            const greetingText = document.getElementById('greetingText');
+            const cardImage = document.getElementById('cardImage');
+
+            card.style.backgroundColor = bgColor;
+            card.style.border = `5px ${borderStyle} #000`;
+
+            greetingText.innerText = greeting;
+            greetingText.style.fontFamily = fontFamily;
+            greetingText.style.fontSize = fontSize + 'px';
+
+            if (showImage) {
+                cardImage.style.display = 'block';
+            } else {
+                cardImage.style.display = 'none';
+            }
+        }
+    </script>
+
+</body>
+</html>
