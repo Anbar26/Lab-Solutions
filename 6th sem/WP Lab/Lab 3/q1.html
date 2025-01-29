@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Quiz</title>
+    <style>
+        body {
+            font-family: 'Bookman', serif;
+            background-color: #ce62adc5;
+            margin: 0;
+            padding: 0;
+        }
+
+        #quiz-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2em;
+        }
+
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        .options {
+            margin: 10px 0;
+        }
+
+        .options input {
+            margin-right: 10px;
+        }
+
+        .options label {
+            font-size: 1.1em;
+            cursor: pointer;
+            display: block;
+            padding: 8px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .options label:hover {
+            background-color: #e0e0e0;
+        }
+
+        #submit-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #c058a1c5;
+            color: white;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        #submit-btn:hover {
+            background-color: #9c397fc5;
+        }
+
+        #result {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .correct {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .incorrect {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="quiz-container">
+    <h1>Online Quiz</h1>
+    <div id="quiz">
+        <div class="question-container">
+            <p class="question">What is the capital of France?</p>
+            <div class="options">
+                <label>
+                    <input type="radio" name="question1" value="Paris"> Paris
+                </label>
+                <label>
+                    <input type="radio" name="question1" value="London"> London
+                </label>
+                <label>
+                    <input type="radio" name="question1" value="Berlin"> Berlin
+                </label>
+                <label>
+                    <input type="radio" name="question1" value="Madrid"> Madrid
+                </label>
+            </div>
+        </div>
+
+        <div class="question-container">
+            <p class="question">What is the largest planet in our Solar System?</p>
+            <div class="options">
+                <label>
+                    <input type="radio" name="question2" value="Earth"> Earth
+                </label>
+                <label>
+                    <input type="radio" name="question2" value="Jupiter"> Jupiter
+                </label>
+                <label>
+                    <input type="radio" name="question2" value="Mars"> Mars
+                </label>
+                <label>
+                    <input type="radio" name="question2" value="Saturn"> Saturn
+                </label>
+            </div>
+        </div>
+
+        <div class="question-container">
+            <p class="question">Who wrote the play 'Romeo and Juliet'?</p>
+            <div class="options">
+                <label>
+                    <input type="radio" name="question3" value="Shakespeare"> Shakespeare
+                </label>
+                <label>
+                    <input type="radio" name="question3" value="Dickens"> Dickens
+                </label>
+                <label>
+                    <input type="radio" name="question3" value="Austen"> Austen
+                </label>
+                <label>
+                    <input type="radio" name="question3" value="Tolkien"> Tolkien
+                </label>
+            </div>
+        </div>
+
+        <button id="submit-btn">Submit</button>
+    </div>
+    <div id="result" class="hidden"></div>
+</div>
+
+<script>
+    const quizAnswers = {
+        question1: "Paris",
+        question2: "Jupiter",
+        question3: "Shakespeare"
+    };
+
+    document.getElementById('submit-btn').addEventListener('click', function() {
+        let score = 0;
+        let totalQuestions = 3;
+        let resultMessage = '';
+        
+        const answers = document.querySelectorAll('.question-container');
+
+        answers.forEach((question, index) => {
+            const questionName = `question${index + 1}`;
+            const selectedAnswer = document.querySelector(`input[name="${questionName}"]:checked`);
+            const labels = question.querySelectorAll('label');
+            
+            labels.forEach(label => label.classList.remove('correct', 'incorrect'));
+            
+            if (selectedAnswer) {
+                const answerValue = selectedAnswer.value;
+                if (answerValue === quizAnswers[questionName]) {
+                    score++;
+                    selectedAnswer.parentElement.classList.add('correct');
+                } else {
+                    selectedAnswer.parentElement.classList.add('incorrect');
+                }
+            }
+        });
+
+        if (score === totalQuestions) {
+            resultMessage = `Congratulations! You scored ${score} out of ${totalQuestions}.`;
+        } else {
+            resultMessage = `You scored ${score} out of ${totalQuestions}. Better luck next time!`;
+        }
+
+        const resultDiv = document.getElementById('result');
+        resultDiv.textContent = resultMessage;
+        resultDiv.classList.remove('hidden');
+        document.getElementById('submit-btn').classList.add('hidden');
+    });
+</script>
+
+</body>
+</html>
