@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Grade Calculator</title>
+    <style>
+        body {
+            font-family: Bookman, serif;
+            background-color: #cc94bbc5;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        input[type="number"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1.1em;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 85%;
+            padding: 10px;
+            font-size: 1.2em;
+            background-color: #c058a1c5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #a13c83c5;
+        }
+
+        .result {
+            font-size: 1.5em;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Grade Calculator</h2>
+    <label for="subject1">Enter marks for Subject 1:</label><br>
+    <input type="number" id="subject1" placeholder="Enter marks" required><br>
+    
+    <label for="subject2">Enter marks for Subject 2:</label><br>
+    <input type="number" id="subject2" placeholder="Enter marks" required><br>
+
+    <label for="subject3">Enter marks for Subject 3:</label><br>
+    <input type="number" id="subject3" placeholder="Enter marks" required><br>
+
+    <label for="subject4">Enter marks for Subject 4:</label><br>
+    <input type="number" id="subject4" placeholder="Enter marks" required><br>
+
+    <button onclick="calculateGrade()">Calculate Grade</button>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+    function calculateGrade() {
+        const subject1 = parseFloat(document.getElementById('subject1').value);
+        const subject2 = parseFloat(document.getElementById('subject2').value);
+        const subject3 = parseFloat(document.getElementById('subject3').value);
+        const subject4 = parseFloat(document.getElementById('subject4').value);
+
+        if (isNaN(subject1) || isNaN(subject2) || isNaN(subject3) || isNaN(subject4)) {
+            document.getElementById('result').textContent = "Please enter valid marks for all subjects.";
+            return;
+        }
+
+        const totalMarks = subject1 + subject2 + subject3 + subject4;
+        const average = totalMarks / 4;
+
+        let grade = '';
+        if (average > 90) {
+            grade = 'A';
+        } else if (average > 80) {
+            grade = 'B';
+        } else if (average > 70) {
+            grade = 'C';
+        } else if (average > 60) {
+            grade = 'D';
+        } else {
+            grade = 'F';
+        }
+
+        document.getElementById('result').textContent = `Average: ${average.toFixed(2)} | Grade: ${grade}`;
+    }
+</script>
+
+</body>
+</html>

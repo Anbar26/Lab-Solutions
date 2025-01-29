@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Clock & Greeting</title>
+    <style>
+        body {
+            font-family: 'Bookman', serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #c058a1c5;
+            color: white;
+            padding: 15px;
+            font-size: 2.5em;
+            letter-spacing: 1px;
+        }
+
+        .clock {
+            font-size: 4em;
+            margin-top: 50px;
+            color: #333;
+        }
+
+        .greeting {
+            font-size: 1.8em;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        footer {
+            margin-top: 30px;
+            background-color: #c058a1c5;
+            color: white;
+            padding: 10px;
+            font-size: 1.2em;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: white;
+            background-color: #c058a1c5;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #a0317fc5;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    Welcome to Your Dynamic Clock & Greeting
+</header>
+
+<div class="clock" id="clock">
+    Loading clock...
+</div>
+
+<div class="greeting" id="greeting">
+    Loading greeting...
+</div>
+
+<div class="button-container">
+    <button onclick="showGreeting()">Click for Greeting</button>
+</div>
+
+<footer>
+    <p>&copy; 2025 Your Dynamic Greeting App</p>
+</footer>
+
+<script>
+    function updateClock() {
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+        const timeString = `${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`;
+        
+        document.getElementById('clock').textContent = timeString;
+        
+        let greetingMessage = "";
+        if (hours >= 0 && hours < 12) {
+            greetingMessage = "Good Morning!";
+        } else if (hours >= 12 && hours < 18) {
+            greetingMessage = "Good Afternoon!";
+        } else {
+            greetingMessage = "Good Evening!";
+        }
+
+        document.getElementById('greeting').textContent = greetingMessage;
+    }
+
+    function formatTime(time) {
+        return time < 10 ? `0${time}` : time;
+    }
+
+    function showGreeting() {
+        const now = new Date();
+        const hours = now.getHours();
+        
+        let greeting = "";
+        if (hours >= 0 && hours < 12) {
+            greeting = "Good Morning! Have a wonderful day ahead!";
+        } else if (hours >= 12 && hours < 18) {
+            greeting = "Good Afternoon! Keep up the great work!";
+        } else {
+            greeting = "Good Evening! Relax and enjoy your evening!";
+        }
+
+        alert(greeting);
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock(); // Update immediately on page load
+</script>
+
+</body>
+</html>
