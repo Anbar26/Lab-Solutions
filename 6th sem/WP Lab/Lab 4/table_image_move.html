@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table and Image Move</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #container {
+            display: flex;
+            align-items: center;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-right: 20px;
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid black;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+
+        #moveButton {
+            margin-top: 20px;
+        }
+
+        .moving {
+            animation: moveRightToLeft 5s linear infinite;
+        }
+
+        @keyframes moveRightToLeft {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <table>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+            </tr>
+        </table>
+        <img id="image" src= "image.jpeg" alt="Image">
+    </div>
+
+    <button id="moveButton">Move Table and Image</button>
+
+    <script>
+        document.getElementById('moveButton').addEventListener('click', function() {
+            document.getElementById('container').classList.add('moving');
+        });
+    </script>
+
+</body>
+</html>
