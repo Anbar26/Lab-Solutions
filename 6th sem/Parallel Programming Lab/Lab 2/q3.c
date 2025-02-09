@@ -1,3 +1,7 @@
+//Write an MPI program to read N elements of the array in the root process (process 0) where N is equal to the total number
+//of processes. The root process sends one value to each of the slaves. Let even the ranked process find square of the 
+//received element and odd ranked process finds cube of the received element. Use Buffered send.
+
 #include "mpi.h"
 #include <stdio.h>
 #include <stdlib.h>
