@@ -1,0 +1,36 @@
+<!-- myapp/templates/student_form.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details Form</title>
+</head>
+<body>
+
+<h2>Enter Student Details</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+
+{% if student_details %}
+    <h3>Student Details:</h3>
+    <textarea rows="10" cols="50" readonly>
+        Name: {{ student_details.name }}
+        Date of Birth: {{ student_details.dob }}
+        Address: {{ student_details.address }}
+        Contact Number: {{ student_details.contact_number }}
+        Email ID: {{ student_details.email }}
+        Marks in English: {{ student_details.english_marks }}
+        Marks in Physics: {{ student_details.physics_marks }}
+        Marks in Chemistry: {{ student_details.chemistry_marks }}
+    </textarea>
+
+    <h3>Total Percentage: {{ percentage }}%</h3>
+{% endif %}
+
+</body>
+</html>
